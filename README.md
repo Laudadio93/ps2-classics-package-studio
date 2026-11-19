@@ -6,7 +6,7 @@ Create PS3 Classics packages from supported **PS1 and PS2 disc images** on Windo
 
 ## What's new
 
-- **PS3 Package Studio** is available as a standalone app with the new electric-blue PS3 and package Windows icon.
+- **PS3 Package Studio** is available as a standalone app.
 - PS1 and PS2 manual previews are handled on the PC. Missing, corrupt, or still-downloading manuals do not block package creation.
 - The built-in PS1 engine is prevented from picking up manuals beside the disc or from its catalog. The PS2 builder omits the former console-manual writing step.
 - For compatible external engines, the studio checks the staged package for recognized console manual entries and rebuilds the package when necessary before delivery.
