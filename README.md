@@ -1,70 +1,71 @@
-# PS1 and PS2 Classics Package Studio
+# PS3 Package Studio
 
-Create PlayStation 3 Classics packages from supported **PS1 and PS2 disc images** on Windows.
+Create PS3 Classics packages from supported **PS1 and PS2 disc images** on Windows. The standalone studio includes its standard PS1 and PS2 engines, desktop runtime, disc-identification data, and packaging resources.
 
-## Download
+**[Download the latest Windows ZIP](https://github.com/Laudadio93/ps2-classics-package-studio/releases/latest)**, extract it, and open **PS3 Package Studio.exe**. A separate Python installation or packaging application is not needed for the built-in workflows.
 
-Download the [latest Windows ZIP](../../releases/latest), extract it, and run `PS1 and PS2 Classics Package Studio.exe`. The release also provides a source archive and third-party notices. The standard PS1 and PS2 workflows include their runtimes and engines; no Python installation or separate packaging application is required.
+## What's new
 
-## Core features
+- **PS3 Package Studio** is available as a standalone app with the new electric-blue PS3 and package Windows icon.
+- PS1 and PS2 manual previews are handled on the PC. Missing, corrupt, or still-downloading manuals do not block package creation.
+- The built-in PS1 engine is prevented from picking up manuals beside the disc or from its catalog. The PS2 builder omits the former console-manual writing step.
+- For compatible external engines, the studio checks the staged package for recognized console manual entries and rebuilds the package when necessary before delivery.
+- Final PS3 PKG writing is accelerated for recognized bundled runtimes. Custom engines retain their own writer.
+- The current release includes the PS1 and PS2 features, offline data, artwork tools, compatibility settings, queue, progress display, and visual refinements from the combined studio.
 
-- Automatically detect supported PS1 and PS2 disc images, queue multiple games, and build separate packages sequentially.
-- Track build activity, progress and estimated time where supported, and cancel a build.
-- Find and preview PS1 and PS2 cover artwork online or choose custom artwork; downloaded covers are cached.
-- Use PS2 compatibility profiles, custom configurations, and optional matching widescreen patches.
-- View detailed disc, audio, artwork and manual status before building.
+## Create packages
 
-For the exact supported formats, limitations and recent changes, read the release notes below and the README included in the download.
+1. Select a supported PS1 or PS2 disc image. Keep PS1 CUE files and their referenced tracks together.
+2. Review the detected system, title, game ID, and status indicators. Add additional games to build them one at a time, or select multi-disc mode for a supported engine.
+3. Review artwork, compatibility settings, and any optional patches. Choose an output folder with enough room for temporary files and finished packages.
+4. Start the build. Follow the activity log, percentage and estimated time where available. The completion message shows the output location.
 
-## PS1 and PS2 Classics Package Studio v0.7.0
+The Windows build includes the standard engines. The interface also supports a user-selected compatible pop-fe or pop-fe2 engine.
 
-This update adds a built-in PS2 packaging engine, offline disc verification, software manual support, PS1 patching and configuration options, and an illustrative PS3 menu preview. The standard PS1 and PS2 workflows run on Windows without a separate Python installation or companion application.
+## PS1 support
 
-### What's new since v0.6.0
+- Import supported **CUE, BIN, IMG, and CCD** images, subject to engine support.
+- Build separate packages in a sequential queue or use supported multi-disc mode for up to five discs, with optional in-game disc swapping.
+- See disc, PS1 audio, artwork, and manual indicators. Hover for their status explanations.
+- Consult the bundled LibCrypt index and select an alternate PS1 emulator when appropriate. An unlisted or unreadable ID does not prove a disc is unprotected.
+- Apply a custom **.ps3config** to one CUE disc. For a single-disc, single-BIN CUE, apply supported PPF2, PPF3, or xdelta patches to a working copy. Match the patch to the game revision.
+- SBI files can be detected, but the bundled engine does not import them. Patch and configuration options depend on the selected engine and disc layout.
 
-**Built-in PS2 engine**
+## PS2 support
 
-- The standard PS2 Classics workflow now includes its engine, package writer, and supporting components inside the Windows executable. A separately downloaded PS2 Classics GUI toolkit is no longer needed for that workflow.
-- The built-in PS2 engine creates one DVD ISO package at a time; a queue builds separate packages sequentially. External engines remain available for their supported workflows.
-- Optional widescreen patches are matched to supported games; some patches require runtime behavior and cannot be applied by this workflow.
+- Build a PS2 DVD ISO as a PS3 Classics package. The built-in PS2 engine processes one DVD ISO per package. A queue creates separate packages sequentially.
+- Use automatic compatibility profiles, select a specific profile, disable it, supply a custom CONFIG, or generate an advanced configuration using the available cache, performance, pressure-button, and multitap controls.
+- Match supported widescreen patches by game serial and boot-executable checksum. Availability depends on the title and revision.
+- Open community compatibility reports for manual review. Profiles and patches do not guarantee compatibility on a console.
 
-**Offline disc verification**
+## Disc checks, artwork, and manuals
 
-- An optional Verify disc button compares supported images with bundled Redump SHA-1 records and reports results in Build Activity. It shows progress and supports cancellation without changing the image.
-- PS2 verification supports single-file DVD ISOs. The PS2 catalog snapshot is dated June 15, 2026.
-- PS1 verification supports CUE files with one separate BIN per track, each with one INDEX 01 at 00:00:00 and no gap directives. All track hashes must match the same catalog entry. The PS1 snapshot is dated November 18, 2026.
-- An unknown or unmatched image may be a different revision, modified, absent from the database, or damaged; a match does not guarantee game compatibility. Merged multi-track BINs, unsupported CUE layouts, PS2 CDs, and CHD files are not verified.
+- **Offline disc verification** compares supported images with bundled Redump SHA-1 records. The PS2 check supports single-file DVD ISOs. The PS1 multi-track check expects one BIN per track, one INDEX 01 at 00:00:00 per track, and no gap directives. PS2 CD images, CHD images, and merged multi-track BINs are outside this check.
+- **Status indicators** show whether the disc, referenced PS1 tracks, artwork, and manual were found. Track checks do not test audio playback.
+- **Artwork** can be found before building, previewed, and cached. Choose standard or 3D covers where available, or select a custom icon and background. The PS3 menu preview is illustrative.
+- **Menu audio** options depend on the engine and build mode. Supported engines offer automatic sound, silence, or a custom WAV.
+- **Manual preview** opens supported PDFs and ZIP/CBZ page-image archives on the PC. PS1 lookup checks nearby files. PS2 lookup checks nearby files and the local library, and can optionally search the indexed online collection. Availability varies by title and region.
+- **Online access** is optional for cover and manual lookup and community compatibility reports. Cached artwork and manuals can be reused offline.
 
-**Manuals**
+The package builder excludes recognized console manual files. A missing or unreadable PC manual does not prevent a build.
 
-- PS2 manuals can be selected as ZIP or CBZ archives of page images, detected beside the ISO, or located in a user-selected local library by game ID.
-- If enabled and no local match exists, the app can look up supported U.S. PS2 game IDs in its included index, download a matching manual from Kirkland's Manual Labor collection, render and verify the PDF pages, and cache the result for later offline use. Coverage and availability are incomplete.
-- Manual status is checked before building. Invalid selected manuals block the build; missing optional manuals do not. PS1 manual formats and their limitations are documented in the included README.
-- PDF rendering uses bundled PDFium; no separate PDF application is required.
+## Build activity and output
 
-**PS1 options**
+The activity panel reports applicable copy, encryption, configuration, and package-writing stages. Progress, estimated time, cancellation, errors, and the completed output location are shown when supported. Rebuilding a package to remove recognized external-engine manual entries can require additional time and working space.
 
-- A protection indicator reports whether the detected disc ID appears in the bundled pop-fe LibCrypt database. An unlisted or unreadable ID does not prove a disc is unprotected.
-- Add a custom PS1 .ps3config for a single CUE disc. The engine appends its commands to its own configuration. Existing sidecar configs are also supported.
-- Apply supported PPF2, PPF3, or xdelta patches to a single-disc, single-BIN PS1 CUE. The app copies the disc to a temporary working folder and leaves the original untouched. PPF variants require a matching validation block; xdelta uses its own patch validation. Extra disk space is needed.
-- SBI files are detected but are not imported by the bundled engine. Patching queues, multi-disc packages, and multi-BIN CUEs is not yet supported.
+A Redump match identifies a known disc dump. A mismatch can reflect a different region, revision, modified image, or missing catalog entry. Console compatibility depends on the game, configuration, and PS3 environment.
 
-**Compatibility and presentation**
+## Credits and notices
 
-- Offline PS2 profile lookup shows available profiles by disc ID, with automatic, specific, and custom CONFIG choices.
-- Opt-in advanced PS2 CONFIG options expose documented cache, performance, pressure sensitivity, and multitap settings. They generate a new config instead of the automatic profile and do not guarantee a fix.
-- A button opens community PS2 compatibility reports for manual review by title and region. The app does not yet automatically match those reports to individual disc IDs.
-- Preview the PS3 menu with the chosen title, cover, background, and audio selection. This is an illustration; the console's actual presentation can differ.
-- The activity area includes disc, PS1 disc-audio, artwork, and manual indicators with hover explanations. Artwork can be previewed, and downloaded covers can be reused from the local cache.
-- About and third-party notices have been expanded to credit the referenced projects and data sources.
+- **Ronnie Sahlberg and contributors** developed [pop-fe](https://github.com/sahlberg/pop-fe) and [pop-fe2](https://github.com/sahlberg/pop-fe2), including PS1 packaging and PS2 manual references.
+- **Aldo Vargas** created [PS2 Classics GUI](https://www.psx-place.com/resources/ps2-classics-gui.638/). The **ps3dev-net team** developed ps2classic.
+- **PSL1GHT Development Team**, **Hykem and contributors**, and **OpenSSL contributors** provided package-writing, make_npdata, and cryptographic components. [PSL1GHT](https://github.com/ps3dev/PSL1GHT) · [OpenSSL](https://openssl.org/)
+- **PCSX2 patch authors**, **ManaGunZ contributors**, and **Jabu** provided patch, compatibility, and PS2-FPKG workflow references. [PCSX2 patches](https://github.com/PCSX2/pcsx2_patches) · [ManaGunZ](https://github.com/Zarh/ManaGunZ) · [PS2-FPKG](https://www.psx-place.com/resources/ps2-fpkg.1628/)
+- **Redump contributors** and **tsitokely** provided disc-identification data. [Redump](https://redump.org/) · [ps2-iso-renamer](https://github.com/tsitokely/ps2-iso-renamer)
+- **xlenore and contributors** organize cover artwork. **Kirkland's Manual Labor** and the **Internet Archive** preserve and host manuals. [PS1 covers](https://github.com/xlenore/psx-covers) · [PS2 covers](https://github.com/xlenore/ps2-covers) · [PS2 manuals](https://archive.org/details/kirklands-manual-labor-sony-playstation-2-usa-4k-version)
+- **PDFium contributors**, **Joshua MacDonald and xdelta contributors**, and **ps3classics/ps2 and PS3 Developer Wiki contributors** provide rendering, patch, and configuration tools and references. [PDFium](https://pdfium.googlesource.com/pdfium/) · [xdelta](https://github.com/jmacd/xdelta) · [PS2 CONFIG guide](https://github.com/ps3classics/ps2)
+- **Laudadio93** maintains the application. PlayStation systems, software, and marks belong to Sony Interactive Entertainment and their respective owners.
 
-### Windows download
+The application carries a PS3 placeholder activation file. Redistribution rights for that file have not been confirmed.
 
-Download the **Windows ZIP**, extract it, and run `PS1 and PS2 Classics Package Studio.exe`. The executable contains the application runtime and the engines needed for the standard workflows. Internet access is optional for online artwork and manual lookup. The source archive is provided separately.
-
-A compatible PS3 HEN or CFW setup and the appropriate PS2 Classics placeholder license are required. The release was tested on Windows, including Redump matches for PS1 Silent Hill and PS2 Dragon Ball Z: Budokai, synthetic verification and patch checks, and a PS1 package build using a custom config and patch. The new features have not been tested for gameplay on PS3 hardware.
-
-### Credits
-
-PS1 engine and PS2 manual references: [pop-fe / pop-fe2](https://github.com/sahlberg/pop-fe) by Ronnie Sahlberg and contributors. PS2 Classics GUI: Aldo Vargas; ps2classic: the ps3dev-net team. Disc catalog: [Redump](https://redump.org/) contributors; PS2 catalog snapshot sourced through [ps2-iso-renamer](https://github.com/tsitokely/ps2-iso-renamer), PS1 through [redump.info](https://redump.info/). Manuals: [Kirkland's Manual Labor](https://archive.org/details/kirklands-manual-labor-sony-playstation-2-usa-4k-version). PDF rendering: [PDFium](https://pdfium.googlesource.com/pdfium/). Delta patches: [xdelta3](https://github.com/jmacd/xdelta). Advanced CONFIG reference: [ps3classics/ps2](https://github.com/ps3classics/ps2) and PS3 Developer Wiki contributors. Thanks also to PCSX2 patch authors, ManaGunZ contributors, PSL1GHT, Hykem and contributors, and Jabu for the PS2-FPKG workflow reference. See included notices and licenses.
-
+Earlier versions and their original release notes remain in the [release history](https://github.com/Laudadio93/ps2-classics-package-studio/releases).
